@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dlibrary_postgres
+    environment:
+      POSTGRES_USER: dlibrary
+      POSTGRES_PASSWORD: dlibrary
+      POSTGRES_DB: dlibrary
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dlibrary_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: dlibrary_redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - dlibrary_network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  dlibrary_network:
+    driver: bridge
