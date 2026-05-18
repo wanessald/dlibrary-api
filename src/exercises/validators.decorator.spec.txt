@@ -1,0 +1,41 @@
+import { MinLength, IsPositive, validate } from './validators.decorator';
+
+class BookDto {
+  @MinLength(3)
+  title: string;
+
+  @IsPositive()
+  pageCount: number;
+
+  constructor(title: string, pageCount: number) {
+    this.title = title;
+    this.pageCount = pageCount;
+    validate(this);
+  }
+}
+
+describe('Decorators de validacao', () => {
+  it('should create a valid book', () => {
+    const book = new BookDto('O Hobbit', 310);
+    expect(book.title).toBe('O Hobbit');
+    expect(book.pageCount).toBe(310);
+  });
+
+  it('should throw when title is too short', () => {
+    expect(() => new BookDto('Ab', 310)).toThrow(
+      'title deve ter no minimo 3 caracteres',
+    );
+  });
+
+  it('should throw when pageCount is not positive', () => {
+    expect(() => new BookDto('O Hobbit', 0)).toThrow(
+      'pageCount deve ser um numero positivo',
+    );
+  });
+
+  it('should throw when pageCount is negative', () => {
+    expect(() => new BookDto('O Hobbit', -1)).toThrow(
+      'pageCount deve ser um numero positivo',
+    );
+  });
+});
