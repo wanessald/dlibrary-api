@@ -1,7 +1,5 @@
 export interface IBook {
   id: string;
-  title: string;
-  pageCount: number;
   createdAt: Date;
   getTitle(): string;
 }

@@ -16,7 +16,7 @@ export class Book implements IBook {
     this.title = newTitle;
   }
 
-  // getPageCount(): number {
-  //   return this.pageCount;
-  // }
+  getPageCount(): number {
+    return this.pageCount;
+  }
 }
